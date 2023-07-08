@@ -1,0 +1,20 @@
+[
+    {
+        "name": "STATUS",
+        "limit": 2,
+        "time_unit": 1,
+        "time_measure": "MINUTES"
+    },
+    {
+        "name": "NEWS",
+        "limit": 1,
+        "time_unit": 24,
+        "time_measure": "HOURS"
+    },
+    {
+        "name": "MARKETING",
+        "limit": 3,
+        "time_unit": 1,
+        "time_measure": "HOURS"
+    }
+]
