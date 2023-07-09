@@ -5,6 +5,7 @@ import (
 
 	"github.com/mendezdev/rate-limit-example/core/domain"
 	"github.com/mendezdev/rate-limit-example/core/ports"
+	"github.com/mendezdev/rate-limit-example/core/services/notificationratelimitsrv"
 	"github.com/mendezdev/rate-limit-example/core/services/notificationsrv"
 	"github.com/mendezdev/rate-limit-example/core/utils"
 	"github.com/mendezdev/rate-limit-example/insfrastructure/gateway"
@@ -17,14 +18,24 @@ type App struct {
 }
 
 func NewApp() App {
-	ns := notificationsrv.New(
-		gateway.NewMailSender(),
-		notificationrepo.NewInMemory(),
-		ratelimitconfigurationrepo.NewInMemory(),
-		utils.NewTimeProvider(),
+	notificationRepo := notificationrepo.NewInMemory()
+	rateLimitConfigRepo := ratelimitconfigurationrepo.NewInMemory()
+	timeProvider := utils.NewTimeProvider()
+
+	notificationRatelimitSrv := notificationratelimitsrv.New(
+		rateLimitConfigRepo,
+		notificationRepo,
+		timeProvider,
 	)
 
-	return App{ns}
+	notificationSrv := notificationsrv.New(
+		gateway.NewMailSender(),
+		notificationRatelimitSrv,
+		notificationRepo,
+		timeProvider,
+	)
+
+	return App{notificationSrv}
 }
 
 func (app App) SendNotification(userID string, notificationType string, message string) {
