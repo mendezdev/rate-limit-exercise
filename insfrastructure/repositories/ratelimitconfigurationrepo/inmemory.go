@@ -10,7 +10,7 @@ import (
 )
 
 const (
-	path = "./mock_store/rate_limit_configuration_repo.json"
+	path = "./mock_store/rate_limit_configurations.json"
 )
 
 var (

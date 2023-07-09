@@ -11,7 +11,7 @@ import (
 )
 
 const (
-	path = "./mock_store/notification_repo.json"
+	path = "./mock_store/notifications.json"
 )
 
 var (
