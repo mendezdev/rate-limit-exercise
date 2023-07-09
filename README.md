@@ -16,7 +16,7 @@ Run ``` go test ./... ``` on terminal standing in the root folder of the app to 
 Open the terminal, go to the app root folder and execute ``` go run main.go ```
 
 ## NOTES
-There is a simple rate-limit setting that the app will pull up on startup and can be found at ```./mock_store/rate_limit_configuration_repo.json```
+There is a simple rate-limit setting that the app will pull up on startup and can be found at ```./mock_store/rate_limit_configuration.json```
 
 I took this exercise as a simple first iteration to show a bit of code.
 
