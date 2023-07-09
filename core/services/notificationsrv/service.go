@@ -2,6 +2,7 @@ package notificationsrv
 
 import (
 	"fmt"
+	"time"
 
 	"github.com/mendezdev/rate-limit-example/core/domain"
 	"github.com/mendezdev/rate-limit-example/core/ports"
@@ -69,8 +70,11 @@ func (srv service) isRateLimitExceededFor(userID string, notificationType string
 		return false
 	}
 
-	dateFrom := rlc.GetDateFromFor(srv.timeProvider.Now())
-	notifications, err := srv.notificationRepo.GetByTypeAndUserAndFromDate(userID, notificationType, dateFrom)
+	from := srv.timeProvider.
+		Now().
+		Add(-time.Duration(rlc.TimeUnit) * rlc.GetTimeMeasureInDuration())
+
+	notifications, err := srv.notificationRepo.GetByTypeAndUserAndFromDate(userID, notificationType, from)
 
 	if err != nil {
 		fmt.Printf("error trying to get notifications: %s", err.Error())

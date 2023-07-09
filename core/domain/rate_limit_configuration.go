@@ -12,7 +12,7 @@ type RateLimitConfiguration struct {
 	TimeMeasure string `json:"time_measure"`
 }
 
-func (rlc RateLimitConfiguration) getTimeMeasureInDuration() time.Duration {
+func (rlc RateLimitConfiguration) GetTimeMeasureInDuration() time.Duration {
 	switch rlc.TimeMeasure {
 	case "SECONDS":
 		return time.Second
@@ -24,8 +24,4 @@ func (rlc RateLimitConfiguration) getTimeMeasureInDuration() time.Duration {
 		// TODO: review this
 		panic(fmt.Sprintf("no time measure found for %s", rlc.TimeMeasure))
 	}
-}
-
-func (rlc RateLimitConfiguration) GetDateFromFor(date time.Time) time.Time {
-	return date.Add(-time.Duration(rlc.TimeUnit) * rlc.getTimeMeasureInDuration())
 }
