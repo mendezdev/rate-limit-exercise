@@ -77,7 +77,7 @@ func (srv service) isRateLimitExceededFor(userID string, notificationType string
 	notifications, err := srv.notificationRepo.GetByTypeAndUserAndFromDate(userID, notificationType, from)
 
 	if err != nil {
-		fmt.Printf("error trying to get notifications: %s", err.Error())
+		fmt.Printf("error trying to get notifications: %s\n", err.Error())
 		return false
 	}
 

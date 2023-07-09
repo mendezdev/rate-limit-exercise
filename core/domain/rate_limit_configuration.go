@@ -21,7 +21,7 @@ func (rlc RateLimitConfiguration) GetTimeMeasureInDuration() time.Duration {
 	case "HOURS":
 		return time.Hour
 	default:
-		// TODO: review this
+		// TODO: maybe we return an error instead of throw a panic and shut down the program
 		panic(fmt.Sprintf("no time measure found for %s", rlc.TimeMeasure))
 	}
 }
